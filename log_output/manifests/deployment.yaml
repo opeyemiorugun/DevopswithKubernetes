@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randomstrgenerator-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: randomstrgenerator
+  template:
+    metadata:
+      labels:
+        app: randomstrgenerator
+    spec:
+      containers:
+        - name: randomstrgenerator
+          image: rand_str_generator:latest
+          imagePullPolicy: IfNotPresent
