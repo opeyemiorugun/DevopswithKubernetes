@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: todoapp-ing
+spec:
+    rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix # any address with this / prefix, /api /status and so on.
+          backend:      # a fixed field name
+            service:
+                name: todoapp-svc
+                port:
+                    number: 2341

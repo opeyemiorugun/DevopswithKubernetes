@@ -3,12 +3,10 @@ kind: Service
 metadata:
     name: todoapp-svc
 spec:
-    type: NodePort
+    type: ClusterIP
     selector: 
         app: todoappserver #from the selector in deployment.yaml 
     ports:
-        - name: http
-          nodePort: 30043
+        - port: 2341
           protocol: TCP
-          port: 2341
           targetPort: 5000
