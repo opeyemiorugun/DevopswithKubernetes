@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
         - name: randomstrgenerator
-          image: rand_str_generator:latest
+          image: opeyemiorugun/rand_str_generator:v1
           imagePullPolicy: IfNotPresent

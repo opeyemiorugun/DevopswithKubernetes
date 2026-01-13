@@ -1,0 +1,1 @@
+FLASKAPP=log_output.py

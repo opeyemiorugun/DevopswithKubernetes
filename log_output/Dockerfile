@@ -2,6 +2,12 @@ FROM python:3.11-slim
 
 WORKDIR /usr/src/app
 
-COPY string_generator.py .
+COPY requirements.txt .
 
-CMD ["python", "./string_generator.py"]
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+ENTRYPOINT ["python"]
+
+CMD ["log_output.py"]

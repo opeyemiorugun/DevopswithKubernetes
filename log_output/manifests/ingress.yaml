@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: randomstrgenerator-ing
+spec:
+    rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix # any address with this / prefix, /api /status and so on.
+          backend:      # a fixed field name
+            service:
+                name: randomstrgenerator-svc
+                port:
+                    number: 2343
