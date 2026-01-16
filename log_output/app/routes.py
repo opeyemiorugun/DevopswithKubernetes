@@ -1,8 +1,10 @@
 from flask import render_template
-from app import app, random_id
-from datetime import datetime, timezone
+from app import app
 
 @app.route('/')
 def home():
-    current_time = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    return f"{current_time}: {random_id}"
+    contents = [] 
+    file_path = 'files/log_app_logs'
+    with open(file_path, 'r') as f:
+        contents = f.readlines() 
+    return render_template('index.html', contents=contents)

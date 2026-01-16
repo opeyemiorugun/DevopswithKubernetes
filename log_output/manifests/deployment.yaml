@@ -12,7 +12,19 @@ spec:
       labels:
         app: randomstrgenerator
     spec:
+      volumes:
+        - name: shared-logs
+          emptyDir: {}
       containers:
         - name: randomstrgenerator
-          image: opeyemiorugun/rand_str_generator:v1
+          image: opeyemiorugun/rand_str_generator:v2.1.0
           imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
+        - name: randomstrweb
+          image: opeyemiorugun/randomstrweb:v2.1.1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
