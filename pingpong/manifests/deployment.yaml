@@ -12,7 +12,14 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: pingpong-vol     # ← arbitrary, local to the pod
+          persistentVolumeClaim:
+            claimName: logpong-claim 
       containers:
         - name: pingpong-cont
-          image: opeyemiorugun/ping_pong:v3
+          image: opeyemiorugun/ping_pong:v4
           imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: pingpong-vol
+              mountPath: /usr/src/app/temp
