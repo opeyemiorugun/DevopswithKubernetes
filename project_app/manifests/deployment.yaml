@@ -18,7 +18,7 @@ spec:
             claimName: project-claim  
       containers:
         - name: todoappserver
-          image: opeyemiorugun/todoapp:v3.2.4
+          image: opeyemiorugun/todoapp:v3.3
           imagePullPolicy: Always
           volumeMounts:
             - name: todoapp-vol
