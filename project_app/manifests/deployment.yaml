@@ -12,7 +12,14 @@ spec:
       labels:
         app: todoappserver
     spec:
+      volumes:
+        - name: todoapp-vol
+          persistentVolumeClaim:
+            claimName: project-claim  
       containers:
         - name: todoappserver
-          image: opeyemiorugun/todoapp:v2
+          image: opeyemiorugun/todoapp:v3.2.4
           imagePullPolicy: Always
+          volumeMounts:
+            - name: todoapp-vol
+              mountPath: /usr/src/project_app/app/static
