@@ -1,10 +1,16 @@
-from app import app, counter
+from app import app 
 
-@app.route('/')
-def index():
-    global counter # Declare intent to make it a global variable so it can be modified.
+counter = 0
+def increment_counter():
+    global counter
     counter += 1
-    file_path = 'temp/pingpong_counter'
-    with open(file_path, 'w') as f:
-        f.write(str(counter)) 
+    return counter
+ 
+@app.route('/')
+def index(): 
+    counter = increment_counter()
     return f'pong {counter}'
+
+@app.route('/pings')
+def pings():
+    return {'pings': counter}, 200
