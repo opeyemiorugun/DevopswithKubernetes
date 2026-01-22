@@ -5,6 +5,7 @@ import random
 import string
 from pathlib import Path
 from threading import Timer, Lock
+import os
 
 
 
@@ -72,9 +73,12 @@ class ImageManager:
 image_manager = ImageManager()
  
 image_manager.start_timer() 
+baseurl = os.getenv("TODO_API_URL")
+# baseurl = "http://localhost:5001/todos"
+
 
 @app.route('/')
 def home():
     random_img = image_manager.image_to_render()
-    return render_template('index.html', image_path=random_img)
+    return render_template('index.html', image_path=random_img, URL=baseurl)
 

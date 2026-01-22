@@ -1,10 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="htmx-config" content='{"selfRequestsOnly": false}'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The project App</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx-ext-response-targets@2.0.4" integrity="sha384-T41oglUPvXLGBVyRdZsVRxNWnOOqCynaPubjUVjxhsjFTKrFJGEMm3/0KGmNQ+Pg" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Georgia, serif;
@@ -72,27 +74,38 @@
             color: #666;
             margin-top: 5px;
         }
+        
+        #any-errors {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 6px;
+            display: none; /* Hide when empty */
+        }
+        
+        #any-errors:not(:empty) {
+            display: block; /* Show when it has content */
+        }
     </style>
 </head>
 <body>
     <h1>The project App</h1>
     
     <img src="{{ url_for('static', filename=image_path.name) }}" alt="Random Image" >
-    
-    <div class="input-container">
-        <input type="text" id="todoInput" maxlength="140" placeholder="Enter a todo...">
-        <button id="sendButton">Create todo</button>
-    </div> 
-    
-    <ul class="todo-list">
-		<li>Learn Kubernetes</li>
-		<li>Learn CI/CD</li>
-		<li>Learn Terraform</li>
-		<li>Learn Ansible</li>
-		<li>Work on some projects</li>
-		<li>Get JOB</li>
-    </ul>
-    
+    <div hx-ext="response-targets">
+        <form
+            class="input-container"
+            method="POST"
+            hx-post="{{URL}}"
+            hx-swap="afterbegin"
+            hx-target="#list"
+            hx-target-error="#any-errors"
+            hx-on::after-request="if(event.detail.successful) this.reset()" >
+                <input type="text" id="todoInput" maxlength="140" name="todo" placeholder="Enter a todo...">
+                <button type="submit">Create todo</button>
+            </form>  
+            <div id="any-errors"></div>
+        <ul class="todo-list" id="list" hx-get="{{URL}}" hx-trigger="load"></ul>
+    </div>
     <div class="course-title">DevOps with Kubernetes 2025</div>
 
 </body>

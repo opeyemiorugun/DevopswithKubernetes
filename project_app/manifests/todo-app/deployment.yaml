@@ -18,8 +18,11 @@ spec:
             claimName: project-claim  
       containers:
         - name: todoappserver
-          image: opeyemiorugun/todoapp:v3.3
+          image: opeyemiorugun/todoapp:v4
           imagePullPolicy: Always
           volumeMounts:
             - name: todoapp-vol
               mountPath: /usr/src/project_app/app/static
+          env:
+            - name: TODO_API_URL
+              value: "http://localhost:8081/todos" 
