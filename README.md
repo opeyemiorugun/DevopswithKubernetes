@@ -3,14 +3,21 @@
 ## Exercises
 
 ### Chapter 2
+- [1.1](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.1/log_output) - Log output
+- [1.2](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.2/project_app) - Project app
+- [1.3](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.3/log_output) - Log output
+- [1.4](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.4/project_app) - Project app
+- [1.5](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.5/project_app) - Project app
+- [1.6](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.6/project_app) - Project app
+- [1.7](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.7/log_output) - Log output
+- [1.8](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.8/project_app) - Project app
+- [1.9](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.9/pingpong) - Ping-pong
+- [1.10](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.10/log_output) - Log output
+- [1.11](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.11/log_output) - Log output (shared volume with ping-pong)
+- [1.12](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.12/project_app) - Project app
+- [1.13](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.13/project_app) - Project app
 
-+ [1.1](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.1/log_output)
-+ [1.2](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.2/project_app)
-+ [1.3](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.3/log_output)
-+ [1.4](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.4/project_app)
-+ [1.5](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.5/project_app)
-+ [1.6](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.6/project_app)
-+ [1.7](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.7/log_output)
-+ [1.8](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.8/project_app)
-+ [1.9](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.9/pingpong)
-+ [1.10](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.10/log_output)
+### Chapter 3
+- [2.1](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.1/log_output) - Log output (HTTP connection to ping-pong)
+- [2.2](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.2/project_app) - Project app
+- [2.3](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.3/log_output) - Log output (Shared namespace with ping-pong)
