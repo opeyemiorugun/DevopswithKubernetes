@@ -16,14 +16,27 @@ spec:
       volumes:
         - name: todoapp-vol
           persistentVolumeClaim:
-            claimName: project-claim  
+            claimName: project-claim
       containers:
         - name: todoappserver
-          image: opeyemiorugun/todoapp:v4
+          image: opeyemiorugun/todoapp:v4.1.1
           imagePullPolicy: Always
           volumeMounts:
             - name: todoapp-vol
               mountPath: /usr/src/project_app/app/static
           env:
             - name: TODO_API_URL
-              value: "http://localhost:8081/todos" 
+              valueFrom:
+                configMapKeyRef:
+                  name: project-config
+                  key: todo_app_url
+            - name: IMAGE_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: project-config
+                  key: image_service_url
+            - name: TIMER_INTERVAL
+              valueFrom:
+                configMapKeyRef:
+                  name: project-config
+                  key: timer_interval

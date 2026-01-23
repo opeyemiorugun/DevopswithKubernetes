@@ -11,11 +11,11 @@ import os
 
 class ImageManager:
     def __init__(self):
-        self.baseurl = "https://picsum.photos/200/300"
+        self.baseurl = os.getenv("IMAGE_SERVICE_URL", "https://picsum.photos/200/300")
         self.images_rendered = []  
         self.directory = Path("./app/static")
         self.timer_finish = False
-        self.TIMER_INTERVAL = 600 
+        self.TIMER_INTERVAL = int(os.getenv("TIMER_INTERVAL", 600))  # Default to 10 minutes
         self.lock = Lock()
 
     def generate_img_name(self):
