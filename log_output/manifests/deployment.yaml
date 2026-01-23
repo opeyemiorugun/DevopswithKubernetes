@@ -16,7 +16,13 @@ spec:
       volumes:
         - name: shared-logs   # ← arbitrary, local to the pod
           persistentVolumeClaim: 
-            claimName: logpong-claim
+            claimName: logpong-claim  # ← reference to the PVC
+        - name: config-volume
+          configMap:
+            name: log-config
+            items:
+              - key: "information"
+                path: "information.txt"
       containers:
         - name: randomstrgenerator
           image: opeyemiorugun/rand_str_generator:v2.1.0
@@ -25,8 +31,16 @@ spec:
             - name: shared-logs
               mountPath: /usr/src/app/files
         - name: randomstrweb
-          image: opeyemiorugun/randomstrweb:v4.1.0
+          image: opeyemiorugun/randomstrweb:v4.2.0
           imagePullPolicy: IfNotPresent
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-config # ← name of the ConfigMap
+                  key: message      # ← key whose value we want
           volumeMounts:
             - name: shared-logs
               mountPath: /usr/src/app/files
+            - name: config-volume
+              mountPath: /usr/src/app/config

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: exercises
+  name: log-config
+data:
+  # property-like keys; each key maps to a simple value
+  message: "hello world"
+
+  # file-like keys
+  information: |
+    this text is from  a file
