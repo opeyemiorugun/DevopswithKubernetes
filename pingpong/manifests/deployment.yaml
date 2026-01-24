@@ -15,5 +15,11 @@ spec:
     spec: 
       containers:
         - name: pingpong-cont
-          image: opeyemiorugun/ping_pong:v5
+          image: opeyemiorugun/ping_pong:v5.1.3
           imagePullPolicy: IfNotPresent 
+          env:
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-details
+                  key: POSTGRES_URL
