@@ -15,5 +15,11 @@ spec:
     spec: 
       containers:
         - name: todobackend
-          image: opeyemiorugun/todoapi:v1.0
-          imagePullPolicy: Always  
+          image: opeyemiorugun/todoapi:v1.1.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-details
+                  key: POSTGRES_URL
