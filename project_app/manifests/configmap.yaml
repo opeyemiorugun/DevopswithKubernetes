@@ -8,3 +8,16 @@ data:
   todo_app_url: "http://localhost:8081/todos"
   image_service_url: "https://picsum.photos/200/300"
   timer_interval: "600"
+  fetch_random_wiki: |
+    #!/bin/sh
+
+    URL="https://en.wikipedia.org/wiki/Special:Random"
+    USER_AGENT="KubernetesLearningExercise/1.0 (contact: opeyemideborahanu@gmail.com)"
+
+    # Get the final URL after redirect
+    FINAL_URL=$(curl -s -L -H "User-Agent: $USER_AGENT" -o /dev/null -w "%{url_effective}" "$URL")
+
+    echo "Read $FINAL_URL"
+
+    # Post to Flask backend (as form data)
+    curl -s -d "todo=Read $FINAL_URL" -X POST http://todo-backend-svc:2441/todos

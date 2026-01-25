@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: read-wikipedia
+spec:
+  schedule: "0 * * * *" # At minute 0 of every hour
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: fetch-wiki
+            image: curlimages/curl:8.18.0
+            imagePullPolicy: IfNotPresent
+            command: ["/scripts/fetch_random_wiki.sh"]
+            volumeMounts:
+              - name: config
+                mountPath: /scripts
+                readOnly: true
+          volumes:
+          - name: config
+            configMap:
+              name: project-config
+              defaultMode: 0755
+              items:
+              - key: "fetch_random_wiki"
+                path: "fetch_random_wiki.sh"
+          restartPolicy: Never # Never restart the container, even if it fails
