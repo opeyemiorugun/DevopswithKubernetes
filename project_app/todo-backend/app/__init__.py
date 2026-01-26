@@ -2,10 +2,12 @@ from flask import Flask, render_template_string, jsonify, request
 from flask_cors import CORS
 import os
 import sqlalchemy as sa
+from app.logging import custom_logger
+
 
 app = Flask(__name__) 
 CORS(app)
-
+lo = custom_logger(__name__)
 database_url = os.getenv("POSTGRES_URL")
 engine = sa.create_engine(database_url)
 metadata = sa.MetaData()
@@ -13,7 +15,7 @@ todos = sa.Table(
 	'todos',
 	metadata,
 	sa.Column("id", sa.Integer, primary_key=True),
-	sa.Column('task', sa.String, nullable=False, unique=True)
+	sa.Column('task', sa.String(140), nullable=False, unique=True)
 )
 metadata.create_all(engine)
 
@@ -26,6 +28,7 @@ def get_all_todos():
 def insert_todo(task):
 	with engine.begin() as conn:
 		conn.execute(todos.insert().values(task=task))
+
     
 @app.route('/todos',methods=['GET', 'POST'])
 def home():
@@ -38,12 +41,18 @@ def home():
 		''', todos=list_of_todos), 200
 	else:
 		task = request.form.get('todo', '').strip()
-
+	
 		if not task:
 			return "<p>Todo cannot be empty!</p>", 400
+		
+		if len(task) > 140:
+			lo.warning("todo.too_long", extra={"method":"POST", "todo_length": len(task),"status": "failed"})
+			return "Todo exceeds max character length of 140", 400
 		try:
 			insert_todo(task)
+			lo.info("todo.created", extra={"method":"POST", "status": "success"})
 			return f"<li>{task}</li>", 200
+
 		except sa.exc.IntegrityError:
 			return "<p>Todo already exists!</p>", 409
  

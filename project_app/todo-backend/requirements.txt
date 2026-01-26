@@ -3,3 +3,4 @@ python-dotenv
 flask-cors
 psycopg2-binary
 sqlalchemy
+python-json-logger
