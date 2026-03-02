@@ -47,13 +47,14 @@ spec:
           volumeMounts:
             - name: pgdata-vol
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
 
   volumeClaimTemplates:
     - metadata:
         name: pgdata-vol  # One PVC per Pod
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
+        storageClassName: default # local-path to dynamically provision storage, default is for aks
         resources:
           requests:
             storage: 1Gi
