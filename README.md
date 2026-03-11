@@ -1,23 +1,61 @@
-# Kubernetes Submissions
+# Kubernetes Learning Projects
 
-## Exercises
+Production-ready Kubernetes applications demonstrating cloud-native development patterns, microservices architecture, and DevOps practices.
 
-### Chapter 2
-- [1.1](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.1/log_output) - Log output
-- [1.2](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.2/project_app) - Project app
-- [1.3](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.3/log_output) - Log output
-- [1.4](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.4/project_app) - Project app
-- [1.5](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.5/project_app) - Project app
-- [1.6](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.6/project_app) - Project app
-- [1.7](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.7/log_output) - Log output
-- [1.8](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.8/project_app) - Project app
-- [1.9](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.9/pingpong) - Ping-pong
-- [1.10](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.10/log_output) - Log output
-- [1.11](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.11/log_output) - Log output (shared volume with ping-pong)
-- [1.12](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.12/project_app) - Project app
-- [1.13](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/1.13/project_app) - Project app
+---
 
-### Chapter 3
-- [2.1](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.1/log_output) - Log output (HTTP connection to ping-pong)
-- [2.2](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.2/project_app) - Project app
-- [2.3](https://github.com/opeyemiorugun/DevopswithKubernetes/tree/2.3/log_output) - Log output (Shared namespace with ping-pong)
+## Projects
+
+### 1. Distributed Microservices System
+Multi-container pod architecture with inter-service HTTP communication, PostgreSQL persistence, and full observability stack integration.
+
+**Tech Stack:** Kubernetes, Flask, PostgreSQL, Prometheus, Grafana, Loki  
+**Key Concepts:** Multi-container pods, StatefulSets, ConfigMaps, Secrets, service discovery
+
+[View detailed documentation for log output →](./log_output/README.md)
+[PingPong->](./pingpong/README.md)
+
+---
+
+### 2. [Cloud-Native Todo Application](./project_app/)
+Full-stack CRUD application with automated Wikipedia content generation via CronJobs, image caching, and database persistence.
+
+**Tech Stack:** Kubernetes, Flask, PostgreSQL, CronJobs, Persistent Volumes  
+**Key Concepts:** StatefulSets, CronJob scheduling, namespace isolation, twelve-factor app
+
+[View detailed documentation →](./project_app/README.md)
+
+---
+
+## Quick Start
+
+Each project has detailed setup instructions in its documentation. Both run on k3d clusters with similar configuration.
+```bash
+# Create k3d cluster
+k3d cluster create --port 8081:80@loadbalancer --agents 2
+
+# Deploy microservices system
+kubectl apply -f manifests/
+kubectl apply -f log_output/manifests/
+kubectl apply -f pingpong/manifests/
+
+# OR deploy todo application
+kubectl apply -f project_app/manifests/
+```
+
+
+
+## Future Improvements
+
+- [ ] Add CI/CD pipeline with GitHub Actions
+- [ ] Implement resource limiting and health checks
+- [ ] Implement Terraform for infrastructure as code
+- [ ] Add Helm chart for easier deployment
+- [ ] Implement horizontal pod autoscaling
+- [ ] Add integration tests
+- [ ] Add rate limiting to APIs
+- [ ] Deploy on cloud infrastructure
+
+## License
+
+This project is part of a Kubernetes learning exercise.
